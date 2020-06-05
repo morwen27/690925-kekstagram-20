@@ -11,55 +11,52 @@ var COMMENTS = [
 ];
 var AUTHORS = ['Барсик', 'Мурка', 'Глашка', 'Пушок', 'Дикий и необузданный кот', 'Лапочка', 'Марсель', 'Корсик', 'Пёс'];
 
-var picturesContainer = document.querySelector('.pictures');
-var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-var fragment = document.createDocumentFragment();
-
 var getRandomNumber = function (min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-
   var number = Math.floor(Math.random() * (max - min + 1)) + min;
 
   return number;
 };
 
-var generateCommentsArr = function (comments, authors) {
-  var arr = [];
+var generateCommentsArray = function (comments, authors) {
+  var commentsArray = [];
   var quantityComments = getRandomNumber(1, comments.length);
 
   for (var i = 1; i <= quantityComments; i++) {
-    var obj = {};
+    var comment = {};
 
-    obj.avatar = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-    obj.message = comments[getRandomNumber(0, comments.length - 1)];
-    obj.name = authors[getRandomNumber(0, authors.length - 1)];
+    comment.avatar = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
+    comment.message = comments[getRandomNumber(0, comments.length - 1)] + ' ' + comments[getRandomNumber(0, comments.length - 1)];
+    comment.name = authors[getRandomNumber(0, authors.length - 1)];
 
-    arr.push(obj);
+    commentsArray.push(comment);
   }
 
-  return arr;
+  return commentsArray;
 };
 
 var generatePhotosData = function (quantity) {
-  var arr = [];
+  var photosArray = [];
 
   for (var i = 1; i <= quantity; i++) {
-    var obj = {};
+    var photo = {};
 
-    obj.url = '/photos/' + i + '.jpg';
-    obj.description = '';
-    obj.likes = getRandomNumber(15, 200);
-    obj.comments = generateCommentsArr(COMMENTS, AUTHORS);
+    photo.url = 'photos/' + i + '.jpg';
+    photo.description = '';
+    photo.likes = getRandomNumber(15, 200);
+    photo.comments = generateCommentsArray(COMMENTS, AUTHORS);
 
-    arr.push(obj);
+    photosArray.push(photo);
 
   }
 
-  return arr;
+  return photosArray;
 };
 
 var renderOtherUsersPhotos = function (data) {
+
+  var picturesContainer = document.querySelector('.pictures');
+  var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  var fragment = document.createDocumentFragment();
 
   for (var i = 0; i < data.length; i++) {
     var element = pictureTemplate.cloneNode(true);
