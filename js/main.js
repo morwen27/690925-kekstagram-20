@@ -20,21 +20,17 @@ var getRandomNumber = function (begin, end) {
 var generateComments = function () {
   var comments = [];
   var quantityComments = getRandomNumber(1, SENTENCES.length);
-  var quantitySentences = getRandomNumber(1, 2);
 
   for (var i = 1; i <= quantityComments; i++) {
     var comment = {};
+    var quantitySentences = getRandomNumber(1, 2);
 
     comment.avatar = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
 
-    comment.message = '';
+    comment.message = SENTENCES[getRandomNumber(0, SENTENCES.length - 1)];
 
-    for (var j = 1; j <= quantitySentences; j++) {
-      comment.message += SENTENCES[getRandomNumber(0, SENTENCES.length - 1)];
-
-      if (quantitySentences > 1 && j !== quantitySentences) {
-        comment.message += ' ';
-      }
+    if (quantitySentences > 1) {
+      comment.message += ' ' + SENTENCES[getRandomNumber(0, SENTENCES.length - 1)];
     }
 
     comment.name = AUTHORS[getRandomNumber(0, AUTHORS.length - 1)];
