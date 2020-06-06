@@ -1,7 +1,7 @@
 'use strict';
 
 var QUANTITY_PHOTOS = 25;
-var COMMENTS = [
+var SENTENCES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -11,45 +11,56 @@ var COMMENTS = [
 ];
 var AUTHORS = ['Барсик', 'Мурка', 'Глашка', 'Пушок', 'Дикий и необузданный кот', 'Лапочка', 'Марсель', 'Корсик', 'Пёс'];
 
-var getRandomNumber = function (min, max) {
-  var number = Math.floor(Math.random() * (max - min + 1)) + min;
+var getRandomNumber = function (begin, end) {
+  var number = Math.floor(Math.random() * (end - begin + 1)) + begin;
 
   return number;
 };
 
-var generateCommentsArray = function (comments, authors) {
-  var commentsArray = [];
-  var quantityComments = getRandomNumber(1, comments.length);
+var generateComments = function () {
+  var comments = [];
+  var quantityComments = getRandomNumber(1, SENTENCES.length);
+  var quantitySentences = getRandomNumber(1, 2);
 
   for (var i = 1; i <= quantityComments; i++) {
     var comment = {};
 
     comment.avatar = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-    comment.message = comments[getRandomNumber(0, comments.length - 1)] + ' ' + comments[getRandomNumber(0, comments.length - 1)];
-    comment.name = authors[getRandomNumber(0, authors.length - 1)];
 
-    commentsArray.push(comment);
+    comment.message = '';
+
+    for (var j = 1; j <= quantitySentences; j++) {
+      comment.message += SENTENCES[getRandomNumber(0, SENTENCES.length - 1)];
+
+      if (quantitySentences > 1 && j !== quantitySentences) {
+        comment.message += ' ';
+      }
+    }
+
+    comment.name = AUTHORS[getRandomNumber(0, AUTHORS.length - 1)];
+
+    comments.push(comment);
   }
 
-  return commentsArray;
+  return comments;
 };
 
-var generatePhotosData = function (quantity) {
-  var photosArray = [];
+var generatePhotosData = function () {
+  var photos = [];
 
-  for (var i = 1; i <= quantity; i++) {
+  for (var i = 1; i <= QUANTITY_PHOTOS; i++) {
     var photo = {};
 
     photo.url = 'photos/' + i + '.jpg';
-    photo.description = '';
+    photo.description = 'Такой красоты человечество никогда раньше не видело. Не согласны - отписывайтесь';
     photo.likes = getRandomNumber(15, 200);
-    photo.comments = generateCommentsArray(COMMENTS, AUTHORS);
+    photo.comments = generateComments();
 
-    photosArray.push(photo);
+    photos.push(photo);
 
   }
 
-  return photosArray;
+  return photos;
 };
 
 var renderOtherUsersPhotos = function (data) {
@@ -72,5 +83,5 @@ var renderOtherUsersPhotos = function (data) {
 
 };
 
-var data = generatePhotosData(QUANTITY_PHOTOS);
+var data = generatePhotosData();
 renderOtherUsersPhotos(data);
