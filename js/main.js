@@ -74,3 +74,32 @@ var renderOtherUsersPhotos = function (data) {
 
 var data = generatePhotosData(QUANTITY_PHOTOS);
 renderOtherUsersPhotos(data);
+
+var documentBody = document.querySelector('body');
+var bigPictureContainer = document.querySelector('.big-picture');
+
+var commentsList = bigPictureContainer.querySelectorAll('.social__comment');
+var socialCommentCount = bigPictureContainer.querySelector('.social__comment-count');
+var buttonCommentLoader = bigPictureContainer.querySelector('button.comments-loader');
+
+documentBody.classList.add('modal-open');
+bigPictureContainer.classList.remove('hidden');
+socialCommentCount.classList.add('hidden');
+buttonCommentLoader.classList.add('hidden');
+
+bigPictureContainer.querySelector('.big-picture__img img').src = data[0].url;
+bigPictureContainer.querySelector('.likes-count').textContent = data[0].likes;
+bigPictureContainer.querySelector('.comments-count').textContent = data[0].comments.length;
+bigPictureContainer.querySelector('.social__caption').textContent = data[0].description;
+
+for (var i = 0; i < commentsList.length; i++) {
+  var comment = commentsList[i];
+
+  comment.querySelector('.social__text').textContent = data[0].comments[i].message;
+  comment.querySelector('.social__picture').src = data[0].comments[i].avatar;
+  comment.querySelector('.social__picture').alt = data[0].comments[i].name;
+
+  if (data[0].comments.length === 1) {
+    break;
+  }
+}
