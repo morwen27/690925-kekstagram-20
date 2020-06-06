@@ -97,7 +97,7 @@ buttonCommentLoader.classList.add('hidden');
 bigPictureContainer.querySelector('.big-picture__img img').src = data[0].url;
 bigPictureContainer.querySelector('.likes-count').textContent = data[0].likes;
 bigPictureContainer.querySelector('.comments-count').textContent = data[0].comments.length;
-//bigPictureContainer.querySelector('.social__caption').textContent = data[0].description;
+bigPictureContainer.querySelector('.social__caption').textContent = data[0].description;
 
 for (var i = 0; i < commentsList.length; i++) {
   var comment = commentsList[i];
