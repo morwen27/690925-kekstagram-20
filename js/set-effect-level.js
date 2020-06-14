@@ -69,16 +69,16 @@
   effectLevelPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    var startX = evt.clientX;
-    var widthLine = effectLevelLine.getBoundingClientRect().width;
-
     var onMouseMove = function (evtMove) {
       evtMove.preventDefault();
 
-      var shiftX = startX - widthLine;
-      var levelHue = Math.round((shiftX * 100) / widthLine);
+      var startX = evtMove.clientX;
 
-      startX = evtMove.clientX;
+      var widthLine = effectLevelLine.getBoundingClientRect().width;
+      var xLine = effectLevelLine.getBoundingClientRect().x;
+
+      var shiftX = startX - xLine;
+      var levelHue = Math.round((shiftX * 100) / widthLine);
 
       effectLevelPin.style.left = levelHue + '%';
       effectLevelDepth.style.width = effectLevelPin.style.left;
@@ -94,8 +94,8 @@
       }
     };
 
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
+    var onMouseUp = function (evtUp) {
+      evtUp.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

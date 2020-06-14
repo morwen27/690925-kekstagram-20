@@ -11,7 +11,7 @@
     var scaleControlValue = document.querySelector('.scale__control--value').value;
     var scaleStep = 25;
 
-    scaleControlValue = parseInt(scaleControlValue.replace(/%/, ''), 10);
+    scaleControlValue = parseInt(scaleControlValue, 10);
 
     if (evt.target === scaleControlSmaller) {
       scaleControlValue -= scaleStep;
