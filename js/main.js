@@ -130,6 +130,6 @@ var onFullscreenMode = function () {
   showPhotoDetails();
 };
 
-//onFullscreenMode();
+onFullscreenMode();
 
 
