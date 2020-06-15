@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var imageContainer = document.querySelector('.img-upload__wrapper');
   var imagePreview = document.querySelector('.img-upload__preview img');
   var effectLevelSet = document.querySelector('.img-upload__effect-level');
   var effectLevelLine = document.querySelector('.effect-level__line');
@@ -34,7 +35,11 @@
   };
 
   var convertPinOffset = function (offset, maxUnit) {
-    var effectParameter = offset * maxUnit / 100;
+    var effectParameter = Math.floor((offset * maxUnit) / 100);
+
+    if (effectParameter > maxUnit) {
+      effectParameter = maxUnit;
+    }
 
     return effectParameter;
   };
@@ -46,24 +51,28 @@
     switch (currentEffect) {
       case 'chrome':
         imagePreview.style.filter = 'grayscale(' + convertPinOffset(pinOffset, 1) + ')';
+        effectLevelValue.value = convertPinOffset(pinOffset, 1);
         break;
       case 'sepia':
         imagePreview.style.filter = 'sepia(' + convertPinOffset(pinOffset, 1) + ')';
+        effectLevelValue.value = convertPinOffset(pinOffset, 1);
         break;
       case 'marvin':
         imagePreview.style.filter = 'invert(' + convertPinOffset(pinOffset, 100) + '%)';
+        effectLevelValue.value = convertPinOffset(pinOffset, 100);
         break;
       case 'phobos':
         imagePreview.style.filter = 'blur(' + convertPinOffset(pinOffset, 3) + 'px)';
+        effectLevelValue.value = convertPinOffset(pinOffset, 3);
         break;
       case 'heat':
         imagePreview.style.filter = 'brightness(' + convertPinOffset(pinOffset, 3) + ')';
+        effectLevelValue.value = convertPinOffset(pinOffset, 3);
         break;
       case 'none':
         imagePreview.style.filter = 'none';
     }
 
-    effectLevelValue.value = pinOffset;
   };
 
   effectLevelPin.addEventListener('mousedown', function (evt) {
