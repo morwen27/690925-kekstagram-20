@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var imageContainer = document.querySelector('.img-upload__wrapper');
   var imagePreview = document.querySelector('.img-upload__preview img');
   var effectLevelSet = document.querySelector('.img-upload__effect-level');
   var effectLevelLine = document.querySelector('.effect-level__line');
