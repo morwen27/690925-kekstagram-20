@@ -1,77 +1,19 @@
 'use strict';
 
 (function () {
-  var QUANTITY_PHOTOS = 25;
-  var SENTENCES = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.',
-    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-  ];
-  var AUTHORS = ['Барсик', 'Мурка', 'Глашка', 'Пушок', 'Дикий и необузданный кот', 'Лапочка', 'Марсель', 'Корсик', 'Пёс'];
 
-  var getRandomNumber = function (begin, end) {
-    var number = Math.floor(Math.random() * (end - begin + 1)) + begin;
-
-    return number;
-  };
-
-  var generateComments = function () {
-    var comments = [];
-    var quantityComments = getRandomNumber(1, SENTENCES.length);
-
-    for (var i = 1; i <= quantityComments; i++) {
-      var comment = {};
-      var quantitySentences = getRandomNumber(1, 2);
-
-      comment.avatar = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-
-      comment.message = SENTENCES[getRandomNumber(0, SENTENCES.length - 1)];
-
-      if (quantitySentences > 1) {
-        comment.message += ' ' + SENTENCES[getRandomNumber(0, SENTENCES.length - 1)];
-      }
-
-      comment.name = AUTHORS[getRandomNumber(0, AUTHORS.length - 1)];
-
-      comments.push(comment);
-    }
-
-    return comments;
-  };
-
-  var generatePhotosData = function () {
-    var photos = [];
-
-    for (var i = 1; i <= QUANTITY_PHOTOS; i++) {
-      var photo = {};
-
-      photo.url = 'photos/' + i + '.jpg';
-      photo.description = 'Такой красоты человечество никогда раньше не видело. Не согласны - отписывайтесь';
-      photo.likes = getRandomNumber(15, 200);
-      photo.comments = generateComments();
-
-      photos.push(photo);
-
-    }
-
-    return photos;
-  };
-
-  var renderOtherUsersPhotos = function (data) {
+  var loadSuccessHandler = function (photos) {
 
     var picturesContainer = document.querySelector('.pictures');
     var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < photos.length; i++) {
       var element = pictureTemplate.cloneNode(true);
 
-      element.querySelector('.picture__img').src = data[i].url;
-      element.querySelector('.picture__comments').textContent = data[i].comments.length;
-      element.querySelector('.picture__likes').textContent = data[i].likes;
+      element.querySelector('.picture__img').src = photos[i].url;
+      element.querySelector('.picture__comments').textContent = photos[i].comments.length;
+      element.querySelector('.picture__likes').textContent = photos[i].likes;
 
       fragment.appendChild(element);
     }
@@ -80,11 +22,28 @@
 
   };
 
-  var data = generatePhotosData();
+  var loadErrorHandler = function (errorMessage) {
+    var node = document.createElement('div');
 
-  renderOtherUsersPhotos(data);
+    node.style.height = 'auto';
+    node.style.position = 'absolute';
+    node.style.top = '40%';
+    node.style.left = '50%';
+    node.style.padding = '0.5em';
+    node.style.fontSize = '20px';
+    node.style.borderRadius = '0.5em';
+    node.style.backgroundColor = 'deepskyblue';
+    node.style.color = 'black';
+    node.style.transform = 'translate(-50%; -50%)';
+    node.style.zIndex = '25';
 
-  window.data = {
-    data: data,
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+
   };
+
+
+  window.backend.load(loadSuccessHandler, loadErrorHandler);
+
+
 })();
