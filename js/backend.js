@@ -27,9 +27,11 @@
 
     xhr.open('GET', URL);
     xhr.send();
+
   };
 
   window.backend = {
     load: load,
   };
+
 })();

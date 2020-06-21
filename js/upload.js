@@ -11,21 +11,21 @@
   var effectList = document.querySelector('fieldset.img-upload__effects');
   var hashtagsInput = document.querySelector('.text__hashtags');
 
-  var uploadCancelButtonHandler = function (evt) {
+  var uploadCancelButtonKeydownHandler = function (evt) {
     if (evt.key === 'Escape' && hashtagsInput !== document.activeElement) {
       evt.preventDefault();
-      onUploadCancelButton();
+      uploadCancelButtonClickHandler();
     }
   };
 
-  var onUploadCancelButton = function () {
+  var uploadCancelButtonClickHandler = function () {
     document.body.classList.remove('modal-open');
     uploadedImageForm.classList.add('hidden');
 
     uploadImageInput.value = '';
 
-    document.removeEventListener('keydown', uploadCancelButtonHandler);
-    uploadCancelButton.removeEventListener('click', onUploadCancelButton);
+    document.removeEventListener('keydown', uploadCancelButtonKeydownHandler);
+    uploadCancelButton.removeEventListener('click', uploadCancelButtonClickHandler);
 
     scaleControlSmaller.removeEventListener('click', window.scalePreview.changeScaleValue);
     scaleControlBigger.removeEventListener('click', window.scalePreview.changeScaleValue);
@@ -40,8 +40,8 @@
     document.body.classList.add('modal-open');
     uploadedImageForm.classList.remove('hidden');
 
-    document.addEventListener('keydown', uploadCancelButtonHandler);
-    uploadCancelButton.addEventListener('click', onUploadCancelButton);
+    document.addEventListener('keydown', uploadCancelButtonKeydownHandler);
+    uploadCancelButton.addEventListener('click', uploadCancelButtonClickHandler);
 
     scaleControlSmaller.addEventListener('click', window.scalePreview.changeScaleValue);
     scaleControlBigger.addEventListener('click', window.scalePreview.changeScaleValue);
