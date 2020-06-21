@@ -10,9 +10,10 @@
 
   var effectList = document.querySelector('fieldset.img-upload__effects');
   var hashtagsInput = document.querySelector('.text__hashtags');
+  var textDescription = document.querySelector('.text__description');
 
   var uploadCancelButtonKeydownHandler = function (evt) {
-    if (evt.key === 'Escape' && hashtagsInput !== document.activeElement) {
+    if (evt.key === 'Escape' && hashtagsInput !== document.activeElement && textDescription !== document.activeElement) {
       evt.preventDefault();
       uploadCancelButtonClickHandler();
     }

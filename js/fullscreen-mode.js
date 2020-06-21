@@ -56,11 +56,17 @@
     document.body.classList.remove('modal-open');
 
     bigPictureButtonCancel.removeEventListener('click', closeBigPhotoHandler);
+    document.removeEventListener('keydown', closeBigPhotoOnKeydownHandler);
   };
 
-  var fullscreenPhotosHandler = function (evt) {
-    evt.preventDefault();
+  var closeBigPhotoOnKeydownHandler = function (evt) {
 
+    if (evt.key === 'Escape') {
+      closeBigPhotoHandler(evt);
+    }
+  };
+
+  var changeData = function (evt) {
     var photos = document.querySelectorAll('a.picture img');
 
     for (var i = 0; i < photos.length; i++) {
@@ -68,13 +74,36 @@
         showPhotoDetails(i);
       }
     }
+  };
+
+  var openFullscreenMode = function () {
     document.body.classList.add('modal-open');
 
     bigPictureButtonCancel.addEventListener('click', closeBigPhotoHandler);
+    document.addEventListener('keydown', closeBigPhotoOnKeydownHandler);
+  };
+
+  var fullscreenPhotosOnClickHandler = function (evt) {
+    evt.preventDefault();
+
+    changeData(evt);
+    openFullscreenMode();
+
+  };
+
+  var fullscreenPhotosOnKeydownHandler = function (evt) {
+
+    if (evt.key === 'Enter') {
+      evt.preventDefault();
+
+      changeData(evt);
+      openFullscreenMode();
+    }
   };
 
   window.fullscreenMode = {
-    fullscreenPhotosHandler: fullscreenPhotosHandler
+    fullscreenPhotosOnClickHandler: fullscreenPhotosOnClickHandler,
+    fullscreenPhotosOnKeydownHandler: fullscreenPhotosOnKeydownHandler
   };
 
 })();
