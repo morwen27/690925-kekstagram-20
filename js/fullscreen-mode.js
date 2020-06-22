@@ -16,7 +16,7 @@
       excessMarkup[i].remove();
     }
 
-    for (var j = 0; j < photo.comments.length; j++) {
+    for (var j = 0; j < Math.min(photo.comments.length, 5); j++) {
       var comment = commentTemplate.cloneNode(true);
       var avatar = comment.querySelector('.social__picture');
 
@@ -94,10 +94,7 @@
   var fullscreenPhotosOnKeydownHandler = function (evt) {
 
     if (evt.key === 'Enter') {
-      evt.preventDefault();
-
-      changeData(evt);
-      openFullscreenMode();
+      fullscreenPhotosOnClickHandler(evt);
     }
   };
 

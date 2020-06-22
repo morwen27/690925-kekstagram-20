@@ -10,12 +10,13 @@
 
     for (var i = 0; i < photos.length; i++) {
       var element = pictureTemplate.cloneNode(true);
+      var PHOTO = element.querySelector('.picture__img');
 
-      element.querySelector('.picture__img').src = photos[i].url;
-      element.querySelector('.picture__img').setAttribute('tabindex', i);
+      PHOTO.src = photos[i].url;
+      PHOTO.setAttribute('tabindex', i);
 
-      element.querySelector('.picture__img').addEventListener('click', window.fullscreenMode.fullscreenPhotosOnClickHandler);
-      element.querySelector('.picture__img').addEventListener('keydown', window.fullscreenMode.fullscreenPhotosOnKeydownHandler);
+      PHOTO.addEventListener('click', window.fullscreenMode.fullscreenPhotosOnClickHandler);
+      PHOTO.addEventListener('keydown', window.fullscreenMode.fullscreenPhotosOnKeydownHandler);
 
       element.querySelector('.picture__comments').textContent = photos[i].comments.length;
       element.querySelector('.picture__likes').textContent = photos[i].likes;
