@@ -37,7 +37,7 @@
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required>
+              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required tabindex="0">
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
 
@@ -129,7 +129,7 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
@@ -145,8 +145,8 @@
     </section>
 
     <!-- Полноэкранный показ изображения -->
-    <section class="big-picture  overlay  hidden">
-      <h2 class="big-picture__title  visually-hidden">Просмотр фотографии</h2>
+    <section class="big-picture overlay hidden">
+      <h2 class="big-picture__title visually-hidden">Просмотр фотографии</h2>
       <div class="big-picture__preview">
 
         <!-- Просмотр изображения -->
@@ -251,8 +251,9 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
-  <script src="js/data.js"></script>
+  <script src="js/backend.js"></script>
   <script src="js/fullscreen-mode.js"></script>
+  <script src="js/data.js"></script>
   <script src="js/set-effect-level.js"></script>
   <script src="js/scale-preview.js"></script>
   <script src="js/hashtags-validate.js"></script>
