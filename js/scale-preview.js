@@ -41,6 +41,6 @@
   };
 
   window.scalePreview = {
-    changeScaleValue: changeScaleValue,
+    changeScaleValue: changeScaleValue
   };
 })();
