@@ -54,7 +54,7 @@
     hashtagsInput.addEventListener('input', window.hashtagsValidate.validateHashtags);
 
     uploadForm.addEventListener('submit', function (evt) {
-      window.backend.share(new FormData(uploadForm), function (response) {
+      window.backend.share(new FormData(uploadForm), function () {
         uploadCancelButtonClickHandler();
       });
       evt.preventDefault();

@@ -33,8 +33,8 @@
   };
 
   var showPhotoDetails = function (photoSrc) {
-    var photo = window.data.slice().filter(function (photo) {
-      return photo.url === photoSrc;
+    var photo = window.data.slice().filter(function (el) {
+      return el.url === photoSrc;
     })[0];
 
     var buttonCommentLoader = bigPictureContainer.querySelector('button.comments-loader');
