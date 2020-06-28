@@ -12,6 +12,8 @@
   var hashtagsInput = document.querySelector('.text__hashtags');
   var textDescription = document.querySelector('.text__description');
 
+  var uploadForm = document.querySelector('#upload-select-image');
+
   var uploadCancelButtonKeydownHandler = function (evt) {
     if (evt.key === 'Escape' && hashtagsInput !== document.activeElement && textDescription !== document.activeElement) {
       evt.preventDefault();
@@ -50,6 +52,15 @@
     effectList.addEventListener('change', window.setEffectLevel.setEffect);
 
     hashtagsInput.addEventListener('input', window.hashtagsValidate.validateHashtags);
+
+    uploadForm.addEventListener('submit', function (evt) {
+      window.backend.share(new FormData(uploadForm), function () {
+        uploadCancelButtonClickHandler();
+      });
+      evt.preventDefault();
+      uploadForm.reset();
+      window.setEffectLevel.resetSettings();
+    });
 
   });
 })();
