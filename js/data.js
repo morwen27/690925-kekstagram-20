@@ -61,7 +61,7 @@
         .sort(function () {
           return Math.random() - 0.5;
         })
-        .slice(0, 10);
+        .slice(0, QUANTITY_RANDOM_PHOTOS);
 
       renderData(newData);
 
