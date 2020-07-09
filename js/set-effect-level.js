@@ -19,6 +19,8 @@
 
     imagePreview.removeAttribute('class');
     imagePreview.removeAttribute('style');
+
+    effectLevelSet.classList.add('hidden');
   };
 
   var setEffect = function (evt) {
