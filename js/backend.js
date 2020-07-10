@@ -35,6 +35,7 @@
     var URL = 'https://javascript.pages.academy/kekstagram';
 
     var xhr = new XMLHttpRequest();
+
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
@@ -51,7 +52,6 @@
 
     xhr.open('POST', URL);
     xhr.send(data);
-
   };
 
   window.backend = {
