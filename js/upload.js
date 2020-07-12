@@ -12,6 +12,8 @@
   var hashtagsInput = document.querySelector('.text__hashtags');
   var textDescription = document.querySelector('.text__description');
 
+  var uploadForm = document.querySelector('#upload-select-image');
+
   var uploadCancelButtonKeydownHandler = function (evt) {
     if (evt.key === 'Escape' && hashtagsInput !== document.activeElement && textDescription !== document.activeElement) {
       evt.preventDefault();
@@ -24,6 +26,8 @@
     uploadedImageForm.classList.add('hidden');
 
     uploadImageInput.value = '';
+    uploadForm.reset();
+    window.setEffectLevel.resetSettings();
 
     document.removeEventListener('keydown', uploadCancelButtonKeydownHandler);
     uploadCancelButton.removeEventListener('click', uploadCancelButtonClickHandler);
@@ -51,5 +55,54 @@
 
     hashtagsInput.addEventListener('input', window.hashtagsValidate.validateHashtags);
 
+    uploadForm.addEventListener('submit', uploadImage);
   });
+
+  var showMessage = function (about) {
+    var mainBlock = document.querySelector('main');
+    var messageTemplate = document.querySelector('#' + about).content.querySelector('.' + about);
+    var message = messageTemplate.cloneNode(true);
+    var button = message.querySelector('.' + about + '__button');
+
+    var removeMessageHandler = function () {
+      message.remove();
+      window.removeEventListener('click', removeMessageHandler);
+      window.removeEventListener('keydown', removeMessageHandlerOnEscape);
+    };
+
+    var removeMessageHandlerOnEscape = function (evt) {
+      if (evt.key === 'Escape') {
+        removeMessageHandler();
+      }
+    };
+
+    mainBlock.appendChild(message);
+
+    button.addEventListener('click', removeMessageHandler);
+    window.addEventListener('keydown', removeMessageHandlerOnEscape);
+    window.addEventListener('click', removeMessageHandler);
+  };
+
+  var resetUploadForm = function () {
+
+    uploadCancelButtonClickHandler();
+    uploadForm.reset();
+    window.setEffectLevel.resetSettings();
+    uploadForm.removeEventListener('submit', uploadImage);
+  };
+
+  var uploadImage = function (evt) {
+    window.backend.share(new FormData(uploadForm), function () {
+
+      resetUploadForm();
+      showMessage('success');
+
+    }, function () {
+
+      resetUploadForm();
+      showMessage('error');
+    });
+
+    evt.preventDefault();
+  };
 })();

@@ -7,6 +7,7 @@
   var effectLevelDepth = document.querySelector('.effect-level__depth');
   var effectLevelPin = document.querySelector('.effect-level__pin');
   var effectLevelValue = document.querySelector('.effect-level__value');
+  var scaleControlInput = document.querySelector('.scale__control--value');
 
 
   var resetSettings = function () {
@@ -14,9 +15,12 @@
     effectLevelDepth.style.width = effectLevelPin.style.left;
 
     effectLevelValue.value = '100';
+    scaleControlInput.value = '100%';
 
     imagePreview.removeAttribute('class');
     imagePreview.removeAttribute('style');
+
+    effectLevelSet.classList.add('hidden');
   };
 
   var setEffect = function (evt) {
@@ -111,5 +115,6 @@
 
   window.setEffectLevel = {
     setEffect: setEffect,
+    resetSettings: resetSettings,
   };
 })();

@@ -32,8 +32,10 @@
 
   };
 
-  var showPhotoDetails = function (index) {
-    var photo = window.data.photoBase[index];
+  var showPhotoDetails = function (photoSrc) {
+    var photo = window.data.slice().filter(function (el) {
+      return el.url === photoSrc;
+    })[0];
 
     var buttonCommentLoader = bigPictureContainer.querySelector('button.comments-loader');
 
@@ -67,11 +69,12 @@
   };
 
   var changeData = function (evt) {
-    var photos = document.querySelectorAll('a.picture img');
+    var photos = document.querySelectorAll('a.picture');
 
     for (var i = 0; i < photos.length; i++) {
-      if (evt.target.src === photos[i].src) {
-        showPhotoDetails(i);
+      if (evt.currentTarget.dataset.url === photos[i].dataset.url) {
+        showPhotoDetails(photos[i].dataset.url);
+        break;
       }
     }
   };
