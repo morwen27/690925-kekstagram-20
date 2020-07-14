@@ -13,6 +13,7 @@
   var textDescription = document.querySelector('.text__description');
 
   var uploadForm = document.querySelector('#upload-select-image');
+  var imagePreview = document.querySelector('.img-upload__preview img');
 
   var uploadCancelButtonKeydownHandler = function (evt) {
     if (evt.key === 'Escape' && hashtagsInput !== document.activeElement && textDescription !== document.activeElement) {
@@ -26,6 +27,8 @@
     uploadedImageForm.classList.add('hidden');
 
     uploadImageInput.value = '';
+    imagePreview.src = '';
+
     uploadForm.reset();
     window.setEffectLevel.resetSettings();
 
@@ -86,7 +89,6 @@
   var resetUploadForm = function () {
 
     uploadCancelButtonClickHandler();
-    uploadForm.reset();
     window.setEffectLevel.resetSettings();
     uploadForm.removeEventListener('submit', uploadImage);
   };

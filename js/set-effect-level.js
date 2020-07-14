@@ -38,7 +38,7 @@
   };
 
   var convertPinOffset = function (offset, maxUnit) {
-    var effectParameter = Math.floor((offset * maxUnit) / 100);
+    var effectParameter = ((offset * maxUnit) / 100).toFixed(1);
 
     if (effectParameter > maxUnit) {
       effectParameter = maxUnit;
