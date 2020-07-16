@@ -16,7 +16,7 @@
   var imagePreview = document.querySelector('.img-upload__preview img');
 
   var uploadCancelButtonKeydownHandler = function (evt) {
-    if (evt.key === 'Escape' && hashtagsInput !== document.activeElement && textDescription !== document.activeElement) {
+    if (evt.key === window.fullscreenMode.ESC && hashtagsInput !== document.activeElement && textDescription !== document.activeElement) {
       evt.preventDefault();
       uploadCancelButtonClickHandler();
     }
@@ -74,7 +74,7 @@
     };
 
     var removeMessageHandlerOnEscape = function (evt) {
-      if (evt.key === 'Escape') {
+      if (evt.key === window.fullscreenMode.ESC) {
         removeMessageHandler();
       }
     };
@@ -107,4 +107,5 @@
 
     evt.preventDefault();
   };
+
 })();

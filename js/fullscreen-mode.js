@@ -3,6 +3,8 @@
 (function () {
 
   var GAP_FOR_COMMENT = 5;
+  var ESC = 'Escape';
+  var ENTER = 'Enter';
 
   var bigPictureContainer = document.querySelector('.big-picture');
   var bigPictureButtonCancel = bigPictureContainer.querySelector('.big-picture__cancel');
@@ -92,7 +94,7 @@
 
   var closeBigPhotoOnKeydownHandler = function (evt) {
 
-    if (evt.key === 'Escape') {
+    if (evt.key === ESC) {
       closeBigPhotoHandler(evt);
     }
   };
@@ -125,14 +127,15 @@
 
   var fullscreenPhotosOnKeydownHandler = function (evt) {
 
-    if (evt.key === 'Enter') {
+    if (evt.key === ENTER) {
       fullscreenPhotosOnClickHandler(evt);
     }
   };
 
   window.fullscreenMode = {
     fullscreenPhotosOnClickHandler: fullscreenPhotosOnClickHandler,
-    fullscreenPhotosOnKeydownHandler: fullscreenPhotosOnKeydownHandler
+    fullscreenPhotosOnKeydownHandler: fullscreenPhotosOnKeydownHandler,
+    ESC: ESC,
   };
 
 })();

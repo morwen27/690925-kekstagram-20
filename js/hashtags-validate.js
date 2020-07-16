@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var MAX_HASHTAGS_QUANTITY = 5;
+  var MAX_HASHTAG_LENGTH = 20;
+
   var hashtagsInput = document.querySelector('.text__hashtags');
 
   var validateHashtags = function () {
@@ -10,8 +13,8 @@
 
     var message = '';
 
-    if (hashtags.length > 5) {
-      message = 'Количество хештегов не должно превышать 5';
+    if (hashtags.length > MAX_HASHTAGS_QUANTITY) {
+      message = 'Количество хештегов не должно превышать ' + MAX_HASHTAGS_QUANTITY;
     }
 
     for (var i = 0; i < hashtags.length; i++) {
@@ -21,8 +24,8 @@
       if (hashtag[0] === '#' && hashtag.length === 1) {
         message = 'Хештег не должен состоять только из #';
       }
-      if (hashtag.length > 20) {
-        message = 'Хештег должен состоять не более чем из 20 символов, включая #';
+      if (hashtag.length > MAX_HASHTAG_LENGTH) {
+        message = 'Хештег должен состоять не более чем из ' + MAX_HASHTAG_LENGTH + ' символов, включая #';
       }
       if (!/^#[a-zа-я0-9]*$/.test(hashtag)) {
         message = 'Хештег должен состоять только из букв и цифр и начинаться с #';
